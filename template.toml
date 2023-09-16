@@ -1,0 +1,27 @@
+name = "disnake-era-template"
+description = "Internal kickstart template for new disnake-era projects."
+kickstart_version = 1
+url = "https://github.com/disnake-era/template"
+authors = ["elenakrittik <dev.elenakrittik@gmail.com>"]
+keywords = ["disnake", "disnake.ext", "discord", "disnake-era"]
+
+ignore = ["README.md"]
+directory = "{{ project_name }}"
+copy_without_render = ["*.jinja"]
+
+[[variables]]
+name = "project_name"
+default = "disnake-ext-lorem"
+prompt = "Extension name?"
+validation = "^([a-zA-Z][a-zA-Z0-9_-]+)$"
+
+[[variables]]
+name = "project_description"
+default = "none"
+prompt = "Extension description?"
+
+[[variables]]
+name = "package_name"
+default = "lorem"
+prompt = "Name of the extension's sub-package?"
+validation = "^([a-zA-Z][a-zA-Z0-9_]+)$"
