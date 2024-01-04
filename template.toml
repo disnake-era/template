@@ -22,12 +22,17 @@ prompt = "What all of this is about (description)?"
 [[variables]]
 name = "author_name"
 default = "elenakrittik"
-prompt = "Your name (your PyPI/GitHub username, usually)?"
+prompt = "Your name?"
 
 [[variables]]
 name = "author_email"
 default = "dev.elenakrittik@gmail.com"
 prompt = "Your contact email?"
+
+[[variables]]
+name = "github_owner"
+default = "disnake-era"
+prompt = "The account (or organization) that will house this project?"
 
 [[variables]]
 name = "spdx_license"

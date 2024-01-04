@@ -34,7 +34,7 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/{{ author_name }}/{{ project_name }}"
+Repository = "https://github.com/{{ github_owner }}/disnake-ext-{{ project_name }}"
 Documentation = "https://disnake-ext-{{ project_name }}.readthedocs.io/"
 
 [build-system]
