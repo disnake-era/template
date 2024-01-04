@@ -1,22 +1,16 @@
-# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-License-Identifier: {{ spdx_license }}
 
-name: Check with Ruff
+name: Check with pre-commit
 
 on:
   push:
-    paths:
-      - .github
-      - disnake
-      - docs/conf.py
-      - example
-      - pyproject.toml
 
 jobs:
-  check_with_ruff:
+  check_with_pre-commit:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
       fail-fast: false
 
     steps:
@@ -28,5 +22,5 @@ jobs:
         cache: true
         cache-dependency-path: 'pyproject.toml'
 
-    - run: pdm install -Glint
-    - run: pdm run lint
+    - run: pdm install -G:all
+    - run: pdm run pre-commit run --all-files

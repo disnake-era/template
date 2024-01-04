@@ -1,17 +1,17 @@
-# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-License-Identifier: {{ spdx_license }}
 
 [project]
-name = "{{ project_name }}"
+name = "disnake-ext-{{ project_name }}"
 description = "{{ project_description }}"
 authors = [
-    { name = "elenakrittik", email = "dev.elenakrittik@gmail.com" },
+    { name = "{{ author_name }}", email = "{{ author_email }}" },
 ]
 dependencies = [
     "disnake==2.9.*",
 ]
 requires-python = ">=3.9"
 readme = "README.md"
-license = { text = "MIT" }
+license = { text = "{{ spdx_license }}" }
 dynamic = ["version"]
 keywords = [
     "disnake",
@@ -20,7 +20,6 @@ keywords = [
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
@@ -35,8 +34,8 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/disnake-era/{{ project_name }}"
-Documentation = "https://{{ project_name }}.readthedocs.io/"
+Repository = "https://github.com/{{ author_name }}/{{ project_name }}"
+Documentation = "https://disnake-ext-{{ project_name }}.readthedocs.io/"
 
 [build-system]
 requires = ["pdm-backend"]
@@ -46,7 +45,6 @@ build-backend = "pdm.backend"
 dev = ["pre-commit>=3.6.0"]
 type-check = ["pyright>=1.1.344"]
 lint = ["ruff>=0.1.11"]
-format = ["yapf>=0.40.2"]
 # N.B. Keep in sync with docs/requirements.txt
 docs = [
     "Sphinx>=7.2.6",
@@ -58,24 +56,14 @@ docs = [
 
 [tool.pdm.version]
 source = "file"
-path = "disnake/ext/{{ package_name }}/__init__.py"
+path = "disnake/ext/{{ project_name }}/__init__.py"
 
 [tool.pdm.scripts]
-format = { composite = [
-    "yapf ./disnake --recursive --in-place",
-    "yapf ./docs --recursive --in-place",
-    "yapf ./example --recursive --in-place",
-], help = "Run yapf" }
+format = { cmd = "ruff format ./disnake ./docs ./example", help = "Run ruff format" }
 docs = { cmd = "sphinx-autobuild docs docs/_build/html", help = "Run Sphinx documentation server" }
 lint = { cmd = "ruff ./disnake ./docs ./example", help = "Run ruff" }
 pyright = { cmd = "pyright ./disnake ./docs ./example", help = "Run pyright" }
 
-# You should generally use above commands instead
-yapf_check = { composite = [
-    "yapf ./disnake --recursive --diff",
-    "yapf ./docs --recursive --diff",
-    "yapf ./example --recursive --diff",
-] }
 setup_env = { cmd = "pdm install -d -G:all", help = "Set up the local environment and all dependencies" }
 post_setup_env = { cmd = "pre-commit install --install-hooks" }
 
@@ -90,7 +78,7 @@ update = ["--no-editable"]
 
 [tool.pdm.build]
 # nested namespace pkgs are not detected automatically as per PEP 420 & python-packaging docs
-includes = ["disnake/ext/{{ package_name }}"]
+includes = ["disnake/ext/{{ project_name }}"]
 
 [tool.pyright]
 typeCheckingMode = "strict"
@@ -101,20 +89,17 @@ venvPath = "."
 venv = ".venv"
 pythonVersion = "3.9"
 
-[tool.yapf]
-based_on_style = "pep8"
-column_limit = 100
-spaces_around_default_or_named_assign = true
-spaces_around_dict_delimiters = true
-spaces_before_comment = 2
-split_before_dot = true
-coalesce_brackets = true
-dedent_closing_brackets = true
-
 [tool.ruff]
+required-version = "0.1.11"
+preview = true
 line-length = 100
-target-version = "py39"
+indent-width = 4
 
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
 select = [
     "F",       # pyflakes
     "E", "W",  # pycodestyle
@@ -190,11 +175,14 @@ ignore = [
     "ANN401",  # no Any in **extras
     "PLR0912", # too much branches
     "FBT003",  # there's nothing we can do... - napoleon (maybe)
+    "E501",    # incompat w/ ruff format
+    "COM812",  # incompat w/ ruff format
+    "ISC001",  # incompat w/ ruff format
 ]
 
 [tool.towncrier]
 directory = "changelogs"
-package = "disnake.ext.{{ package_name }}"
+package = "disnake.ext.{{ project_name }}"
 filename = "docs/changelog.rst"
 template = "changelogs/_template.rst.jinja"
 title_format = false

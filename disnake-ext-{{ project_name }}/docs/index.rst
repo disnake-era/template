@@ -1,11 +1,11 @@
-.. SPDX-License-Identifier: LGPL-3.0-only
+.. SPDX-License-Identifier: {{ spdx_license }}
 
-.. {{ project_name }} documentation master file, created by
+.. disnake-ext-{{ project_name }} documentation master file, created by
    sphinx-quickstart on Tue Aug 22 00:46:41 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to {{ project_name }}'s documentation!
+Welcome to disnake-ext-{{ project_name }}'s documentation!
 ===================================
 
 .. toctree::

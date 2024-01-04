@@ -1,4 +1,4 @@
-<!-- SPDX-License-Identifier: LGPL-3.0-only -->
+<!-- SPDX-License-Identifier: {{ spdx_license }} -->
 
 # {{ project_name }}
 
@@ -8,12 +8,12 @@
 
 ```py
 import disnake
-from disnake.ext import commands, {{ package_name }}
+from disnake.ext import commands, {{ project_name }}
 
 ...
 ```
 
-See [`./example`](./example) for more.
+See the [example](./example) for more.
 
 ## Version Guarantees
 

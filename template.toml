@@ -6,22 +6,30 @@ authors = ["elenakrittik <dev.elenakrittik@gmail.com>"]
 keywords = ["disnake", "disnake.ext", "discord", "disnake-era"]
 
 ignore = ["README.md"]
-directory = "{{ project_name }}"
-copy_without_render = ["*.jinja"]
+directory = "disnake-ext-{{ project_name }}"
+copy_without_render = ["*.jinja", ".github/workflows/"]
 
 [[variables]]
 name = "project_name"
-default = "disnake-ext-lorem"
-prompt = "Extension name?"
-validation = "^([a-zA-Z][a-zA-Z0-9_-]+)$"
+default = "plugins"
+prompt = "Name your creation (part that comes after disnake-ext-)?"
 
 [[variables]]
 name = "project_description"
-default = "none"
-prompt = "Extension description?"
+default = ""
+prompt = "What all of this is about (description)?"
 
 [[variables]]
-name = "package_name"
-default = "lorem"
-prompt = "Name of the extension's sub-package?"
-validation = "^([a-zA-Z][a-zA-Z0-9_]+)$"
+name = "author_name"
+default = "elenakrittik"
+prompt = "Your name (your PyPI/GitHub username, usually)?"
+
+[[variables]]
+name = "author_email"
+default = "dev.elenakrittik@gmail.com"
+prompt = "Your contact email?"
+
+[[variables]]
+name = "spdx_license"
+default = "MIT"
+prompt = "Which license do you want to pick (SPDX identifier)?"

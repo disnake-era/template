@@ -1,4 +1,4 @@
-REM SPDX-License-Identifier: LGPL-3.0-only
+REM SPDX-License-Identifier: {{ spdx_license }}
 
 @ECHO OFF
 

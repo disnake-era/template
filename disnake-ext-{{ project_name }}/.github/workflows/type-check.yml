@@ -1,22 +1,22 @@
-# SPDX-License-Identifier: LGPL-3.0-only
+# SPDX-License-Identifier: {{ spdx_license }}
 
-name: Build docs
+name: Check typing
 
 on:
   push:
     paths:
       - .github
-      - changelogs
       - disnake
-      - docs
-      # NOTE: No need for pyproject.toml here as both config and deps are in docs/ already.
+      - docs/conf.py
+      - example
+      - pyproject.toml
 
 jobs:
-  build_docs:
+  check_typing:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
       fail-fast: false
 
     steps:
@@ -28,5 +28,5 @@ jobs:
         cache: true
         cache-dependency-path: 'pyproject.toml'
 
-    - run: pdm install -Gdocs
-    - run: cd docs && pdm run sphinx-build -aE -b html -n . _build/html
+    - run: pdm install -Gtype-check
+    - run: pdm run pyright
